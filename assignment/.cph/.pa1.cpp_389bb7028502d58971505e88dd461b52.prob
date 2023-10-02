@@ -1,0 +1,1 @@
+{"name":"Local: pa1","url":"c:\\Users\\hyun\\.vscode\\Algorithm\\assignment\\pa1.cpp","tests":[{"id":1696253228399,"input":"4+3*2+2","output":"12"},{"id":1696253615008,"input":"9+7*4+8*5+5*6+6+7","output":"120"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\hyun\\.vscode\\Algorithm\\assignment\\pa1.cpp","group":"local","local":true}
