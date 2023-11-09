@@ -4,9 +4,9 @@
 
 using namespace std;
 
-bool dp[1001][1001];
-int arr[1001];
-int pre[1001];
+bool dp[10001][10001]; 
+int arr[10001];
+int pre[10001];
 int main()
 {
   ios::sync_with_stdio(0);
