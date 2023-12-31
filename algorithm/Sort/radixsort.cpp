@@ -36,7 +36,7 @@ vector<int> l[10];//  배열 속 자리수 들의 값에 해당하는 리스트
 int main()
 {
 	p10[0] = 1;
-	for (int i = 1; i < k; i++)
+	for (int i = 1; i < k; i++)  //지수값 채우기 
 		p10[i] = p10[i - 1] * 10;
 	for (int i = 0; i < k; i++) //
 	{

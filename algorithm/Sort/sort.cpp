@@ -32,13 +32,13 @@ vector<int> mergesort( const vector<int> &arr) //[ )
 	auto right = mergesort(vector<int>(center, arr.end()));
 	return merge(left,right);
 }
-int main()
-{
-	vector<int> arr = { 10,4,5,9,11,13,15 };
-	arr=mergesort(arr);
-	for (auto k : arr)
-		cout << k << ' ';
-}
+// int main()
+// {
+// 	vector<int> arr = { 10,4,5,9,11,13,15 };
+// 	arr=mergesort(arr);
+// 	for (auto k : arr)
+// 		cout << k << ' ';
+// }
 
 
 
@@ -75,9 +75,65 @@ void merge_sort(int st, int en) { //[ )
 	merge(st, en); 
 }
 
+void bubble_sort(int arr[],int size)
+{
+	for(int i=0;i<size-1;i++)
+	{
+
+		for(int j=0;j<size-i-2;j++)
+		{
+			if(arr[j]>arr[j+1])
+				swap(arr[j],arr[j+1]);
+		}
+	}
+
+
+}
+
+void inser_sort(int arr[],int size,int k) //k element까지 정렬된 부분일때
+{
+	for(int i=k+1;i<size-1;i++)
+	{
+		int cur=arr[i];
+		int j=i;
+		while(j>=0 && arr[j-1]>cur) //정렬된 자리에 들어갈 자리 찾기
+		{
+			arr[j]=arr[j-1];
+			j=j-1;
+		}
+		arr[j]=cur;
+	}
+}
+void shell_sort(int arr[],int size)
+{
+	int gap[3];
+	for(int g=0;g<3;g++)
+	{
+		for(int i=gap[g];i<size;i++)
+		{
+			int cur=arr[i];
+			int j=i;
+			while(j>=0&&arr[j-gap[g]]>cur)
+			{
+				arr[j]=arr[j-gap[g]];
+				j-=gap[g];
+			}
+			arr[j]=cur;
+		}
+
+	}
+
+
+}
+
 int main(void) {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 	merge_sort(0, n);
 	for (int i = 0; i < n; i++) cout << arr[i] << ' ';  // -53 3 12 15 16 22 23 25 46 357
+	cout<<'\n';
+	int arr[10]={7,8,9,5,4,3,2,1,6,10};
+	bubble_sort(arr,10);
+	for(auto k:arr)
+		cout<<k<<' ';
 }
