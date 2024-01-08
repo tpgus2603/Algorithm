@@ -1,4 +1,3 @@
-bfs설명
 
 
 BFS(breath first search):너비 우선탐색 , 같은 거리,depth,level에 해당하는 노드를 우선으로 탐색하는 서치방법 ,queue를 이용하여 구현한다
