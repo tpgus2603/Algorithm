@@ -4,7 +4,7 @@
 반목문안에 재귀 함수를 넣는 방식으로 함수 호출이 종료되면 자연스럽게 백트랙킹이 된다. 
 
 ex) n과m시리즈 ,nqueen문제 
-
+```
 void func(int cur)
 { 
     if (cur == n)
@@ -24,3 +24,4 @@ void func(int cur)
         isused2[i + cur] = 0;
         isused3[cur - i + n - 1] = 0;
     }
+```
