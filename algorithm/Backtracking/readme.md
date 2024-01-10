@@ -6,15 +6,15 @@
 ex) n과m시리즈 ,nqueen문제 
 
 void func(int cur)
-{ // cur은 현재행
+{ 
     if (cur == n)
-    { //
+    { 
         cnt++;
         return;
     }
     for (int i = 0; i < n; i++)
-    {                                                                   // 0~n-1까지의 열을 순회
-        if (isused1[i] || isused2[i + cur] || isused3[cur - i + n - 1]) // 퀸을 못놓는 자리인경우  n-1은 인덱스가 음수가 안되기 위해
+    {                                                                   
+        if (isused1[i] || isused2[i + cur] || isused3[cur - i + n - 1]) 
             continue;
         isused1[i] = 1;
         isused2[i + cur] = 1;
