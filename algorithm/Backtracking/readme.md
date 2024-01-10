@@ -3,8 +3,11 @@
 
 반목문안에 재귀 함수를 넣는 방식으로 함수 호출이 종료되면 자연스럽게 백트랙킹이 된다. 
 
-ex) n과m시리즈 ,nqueen문제 
+ex) n과m시리즈 ,부분수열의합 nqueen문제 
 
+
+
+n과m시리즈 
 ```
 void func(int k) { // 현재 k+1자리수를 택함 
 	if (k == m) { // m개를 모두 택했으면
@@ -23,6 +26,33 @@ void func(int k) { // 현재 k+1자리수를 택함
 	}
 }
 
+```
+부분수열의 합 -> 모든 경우를 탐색 특정 인덱스의 원소를 택하거나 택하지 않으면서 탐색해나감 
+```
+void select(int i, int sum) //a=현재 진행중인 배열 인덱스 
+{
+	if (i == n)
+	{
+		if (sum == m)
+			cnt++;
+		return;
+	}
+	select(i + 1, sum + arr[i]);
+	select(i + 1, sum);
+}
+int main()
+{
+	ios::sync_with_stdio(0); cin.tie(0);
+	cin >> n >> m;
+	int temp;
+	for (int i = 0; i < n; i++)
+	{
+		cin >> temp;
+		arr[i] = temp;
+	}
+	select(0, 0);
+	if (m == 0) cnt--;
+	cout << cnt;
 ```
 
 
