@@ -5,9 +5,7 @@
 
 ex) n과m시리즈 ,nqueen문제 
 
-'''
-bool isused[9]; //사용여부 
-
+```
 void func(int k) { // 현재 k+1자리수를 택함 
 	if (k == m) { // m개를 모두 택했으면
 		for (int i = 0; i < m; i++)
@@ -24,7 +22,8 @@ void func(int k) { // 현재 k+1자리수를 택함
 		}
 	}
 }
-'''
+
+```
 
 
 ```
