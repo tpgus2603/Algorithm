@@ -5,6 +5,7 @@
 
 ex) n과m시리즈 ,nqueen문제 
 ```
+//nqeen문제 branch조건을 반복문안에 넣어 백트랙킹구현
 void func(int cur)
 { 
     if (cur == n)
