@@ -19,6 +19,7 @@ void func(int k) { // 현재 k+1자리수를 택함
 			isused[i] = 0; //돌아왔으면 다 정한거니 마지막에 채운수 미사용으로 바꿈 
 		}
 	}
+ 
  void func(int cur) {  //cur은 현재행
    if (cur == n) { // 
        cnt++;
