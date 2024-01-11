@@ -44,9 +44,95 @@ void insert_sort(int arr[],int size,int k) //k element까지 정렬된 부분일
 	}
 }
 ```
--Shell sort: 선택정렬을 개선한 정렬로 가장 작은 값이 맨 오른쪽에 있는경우 상당히 오래걸리는 
+-Shell sort: 선택정렬을 개선한 정렬로 가장 작은 값이 맨 오른쪽에 있는경우 상당히 오래걸리는 경우를 보안하기위해 gap을 만들어  큰 간격으로 그룹을 만들어 비교를  그룹별로 
+수행하면서 작은값들을 앞으로 보낸다.  여러가지 gap을 사용하며 큰 gap부터 작은 gap으로 줄여나간다.
+```
+void shell_sort(int arr[],int size)
+{
+	int gap[3];
+	for(int g=0;g<3;g++)
+	{
+		for(int i=gap[g];i<size;i++)
+		{
+			int cur=arr[i];
+			int j=i;
+			while(j>=0&&arr[j-gap[g]]>cur)
+			{
+				arr[j]=arr[j-gap[g]];
+				j-=gap[g];
+			}
+			arr[j]=cur;
+		}
 
--MergeSort: 분할정복 기법을 이용하여 수열을 나눠 정렬한 후 합치는 정렬방법 O(nlogn)의 시간복잡도를 지니고 별도의 메모리공간이 필요하다 
+	}
+```
+
+-MergeSort: 분할정복 기법을 이용하여 수열을 나눠 각 각 정렬한 후 합치는 정렬방법 O(nlogn)의 시간복잡도를 지니고 별도의 메모리공간이 필요하다.
+새로운 메모리를 할당하고 각 분할된 배열의 첫번째 원소에 커서를 잡고 비교를 하면서 작은 원소를 할당한 메모리에 넣는다  
+
+```
+void merge(int st, int en) {
+	int mid = (st + en) / 2;
+	int right = mid;
+	int left = st;
+	for (int i = st; i < en; i++)
+	{
+		if (left != mid && (arr[left] <= arr[right] || right == en)) 
+			tmp[i] = arr[left++];
+		else
+			tmp[i] = arr[right++];
+	}
+	for (int i = left; i < en; i++)
+	{
+		arr[i] = tmp[i];
+	}
+}
+
+void merge_sort(int st, int en) { //[ )
+	if (en - st <= 1) return; 
+	int mid = (st + en) / 2;
+	merge_sort(st, mid); 
+	merge_sort(mid, en); 
+	merge(st, en); 
+}
+```
+-Qucik sort: 분할정복 기법을 통해 구현된다. Pivot이라는 기준점(배열의 첫요소 혹은 끝요소)과 정렬된 양쪽 배열의 첫 요소로 left cursor와 right cursor를 잡고 right cursor는 pivot값보다 큰 값으로 설정한다.
+반복문을 통해 left cursor가 pivot보다 크거나 같은값을 가리키고  right cursor가 pivot보다 작은 값을 가리키면 swap하여 위치를 바꾼다. 두 커서가 교차가 될때 right/left cursor의 위치는 pivot의 위치이다.
+
+평균 O(NlogN)의 시간복잡도를 지니지만 피벗 설정이 좋지 않된 경우 worst case에서 O(N^2)의 시간복잡도를 지니기도 한다.
+```
+int partition(int st, int en)
+{
+  int pivot = st;
+  int left = st + 1;
+  int right = en;
+  while (1)
+  {
+    while (left <= right && arr[left] <= arr[pivot]) // 피봇보다 큰거 찾기
+      left++;
+    while (left <= right && arr[right] >= arr[pivot])
+      right--;
+    if (left > right) //교차되면 반복문 종료 
+      break;
+    swap(arr[left], arr[right]);
+  }
+  swap(arr[right], arr[st]); //피벗위치 찾기 
+  return right;
+}
+
+void quicksort(int st, int en)
+{
+  if (en - st <= 0)
+    return;
+  int pivot = partition(st, en);
+  quicksort(st, pivot - 1);
+  quicksort(pivot + 1, en);
+}
+```
+Heapsort: 우선순위큐(Heap)를 활용하여 정렬을한다 heapify를 통하여 O(N)으로 모든 배열의 요소를 heap에 집어넣은 후 heap에서 원소를 하나씩 꺼내어 정렬을 구현한다. 
+
+
+
 
 
 
