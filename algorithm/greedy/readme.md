@@ -8,7 +8,10 @@
 
   3.구현해서 문제를 통과 
 
-  ex) 회의실 배정 문제 
+  ex) 회의실 배정 문제 ,로프문제
+
+  회의실의 회의시간이 가장 빠르게 끝나는 것을 그리디하게 택한다, 만약 회의시간이 끝나는 시간이 같다면 시작시간이 빠른것을 택한다.
+  
 ```
   bool cmp(pair<int, int> a, pair<int, int> b)
 {
@@ -41,3 +44,37 @@ int main()
 	cout << ruse.size();
 }
 ```
+로프문제:  n개의 로프를 택하여 최대중량을 만들때 그리디하게 높은 중량을 실을 수 있는 로프를 택한다.
+```
+bool cmp(int a, int b) //내림차순 정렬 
+{
+	return a > b;
+}
+
+int main()
+{
+	ios::sync_with_stdio(0); cin.tie(0);
+	int n;
+	cin >> n;
+	vector<int>lope;
+	for (int i = 0; i < n; i++)
+	{
+		int weight;
+		cin >> weight;
+		lope.push_back(weight);
+	}
+	sort(lope.begin(), lope.end(), cmp);
+	int maxweigh = lope[0];
+	for (int i = 1; i <n; i++)
+	{
+		if (lope[i] * (i+1) > maxweigh)
+			maxweigh = lope[i] * (i+1);
+	}
+	cout << maxweigh;
+
+
+}
+```
+
+
+
