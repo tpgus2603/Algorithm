@@ -81,5 +81,67 @@ void dk(int st) //경로기능 구현 된 다익스트라
   }
   path.push_back(st);
 }
+```
+-플로이드 알고리즘: 모든 정점 쌍 사이의 최단거리를 구하는 알고리즘 2차원 dp를 활용 k=1~n까지 k를 거쳐가는 최소경로 테이블 업데이트  (cf 최소값 갱신에 min함수 사용보다 필요할때만 갱신이 일어나도록 하는것이 유리)
+
+  다익스트라 알고리즘과 비교하여 음수 간선을 처리 할 수있다. 하지만 음수 사이클을 처리하진 못함 
 
 ```
+int dp[101][101];
+
+int main()
+{
+
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  for (int i = 0; i <= 100; i++)
+  {
+    for (int j = 0; j <= 100; j++)
+    {
+      if (i == j)
+        dp[i][j] = 0;
+      else
+        dp[i][j] = MAX;
+    }
+  }
+  int n, m;
+  cin >> n >> m;
+  int a, b, c;
+  for (int i = 0; i < m; i++)
+  {
+    cin >> a >> b >> c;
+    if (dp[a][b] > c)
+      dp[a][b] = c;
+  }
+  for (int k = 1; k <= n; k++)
+  {
+    for (int i = 1; i <= n; i++)
+    {
+      for (int j = 1; j <= n; j++)
+      {
+        //dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j]);
+        if(dp[i][k]+dp[k][j]<dp[i][j])
+          dp[i][j]=dp[i][k]+dp[k][i];
+      }
+    }
+  }
+  for (int i = 1; i <= n; i++)
+  {
+    for (int j = 1; j <= n; j++)
+    {
+      if(dp[i][j]==MAX)
+        cout<<'0'<<' ';
+      else
+       cout << dp[i][j] << ' ';
+    }
+    cout << '\n';
+  }
+}
+
+```
+
+
+
+
+
+
