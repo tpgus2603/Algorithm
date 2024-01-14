@@ -48,38 +48,11 @@ void dijkstra_native(int st) // O(v^2+E)
 }
 
 int v, e;
-void dkstra(int st)
-{
-  fill(d, d + v + 1, I);
-  while (e--)
-  {
-    int u, v, w;
-    cin >> u >> v >> w;
-    adj[u].push_back({w, v});
-  }
-  // 거리와 이웃정점 정보를 담는 힙
-  priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-  d[st] = 0;
-  pq.push({d[st], st});
-  while (!pq.empty())
-  {
-    auto cur = pq.top();
-    pq.pop();
-    if (d[cur.V] != cur.D) // 테이블의 값과 힙속에 저장된 거리가 다르면 (넘김,확정되기전 거리)
-      continue;
-    for (auto nxt : adj[cur.V]) // 최소정점 찾고 확정 후 연결 간선 확인
-    {
-      if (d[nxt.V] <= d[cur.V] + nxt.D) // 정점+간선이 최소값이 아닌경우
-        continue;
-      d[nxt.V] = d[cur.V] + nxt.D; // 최소값 갱신
-      pq.push({d[nxt.V], nxt.V});  // 힙에넣기
-    }
-  }
-}
+
 
 int back[20001];
 
-void dk(int st)
+void dk(int st) //경로 복원 
 {
   fill(d, d + v + 1, I);
   d[st] = 0;
