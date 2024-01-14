@@ -52,7 +52,7 @@ int v, e;
 
 int back[20001];
 
-void dk(int st) //경로 복원 
+void dk(int st) //경로기능 구현 된 다익스트라 
 {
   fill(d, d + v + 1, I);
   d[st] = 0;
