@@ -134,7 +134,7 @@ struct OptimizedDisJointSet
 
   4. mst에 v-1개의 간선이 추가될때 까지 반복 
 
-
+```
 int prim() //heap을 통한 구현 
 {
   bool closed[100001];
@@ -164,4 +164,4 @@ int prim() //heap을 통한 구현
   return mtotal; 
 }
 
-    
+```  
