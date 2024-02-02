@@ -125,6 +125,18 @@ void dfs2() //방문을 할때 방문표시를 남김
 		}
 	}
 }
+
+void dfsrecur(int cur)
+{
+	vis[cur]=1;
+	cout<<cur<<"->";
+	for(auto nxt:adj[cur])
+	{
+		if(!vis[nxt])
+			dfsrecur(nxt);
+	}
+
+}
 둘다 dfs 순회를 하지만 2번 dfs가 일반적인 dfs방문 순서와 일치함 
 ```
 
