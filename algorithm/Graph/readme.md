@@ -59,15 +59,38 @@ void undirected2()
   시작점을 거리 0으로 하여 거리가 음수인 경우 방문하지 않은 노드로 간주 ,큐에서 노드 하나씩 꺼내고 노드와 연결된 노드들을 큐에 넣으면서 방문한다. 
 
 ```
-void bfs2()
+void bfs(queue<int>& q) //연결 그래프에서 시작점이 들어가있는 상황
+{
+	int cur = q.front();
+	dist[cur] = 0;
+	while (!q.empty())
+	{
+		cur = q.front();
+		q.pop();
+		cout << cur << "->";
+		for (auto nxt : adj[cur])
+		{
+			if (dist[nxt]!=-1)continue;
+			q.push(nxt);
+			vis[nxt] = 1;
+			dist[nxt] = dist[cur] + 1;
+		}
+
+	}
+}
+
+
+
+void bfs2() // 연결 그래프가 아닌경우 
 {
 	queue<int>q;
 	int v;
-	cin>>v;
-	fill(dist,dist+10,-1);
-	q.push(v);
 	for(int i=1;i<=v;i++)
 	{
+		fill(dist+1,dist+v+1,-1);
+		if(dist[v]!=-1)continue;
+		dist[i]=0;
+		q.push(i);
 		while(!q.empty())
 		{	
 			int cur=q.front();
@@ -77,12 +100,13 @@ void bfs2()
 			{
 				if(dist[nxt]!=-1)continue;
 				q.push(nxt);
-
 				dist[nxt]=dist[cur]+1;
 			}
 		}
 	}
 }
+
+
 ```
 
 -DFS그래프: 스택 or재귀를 이용하여 그래프에서 dfs를 구현 
