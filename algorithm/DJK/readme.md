@@ -116,7 +116,7 @@ int main()
   for (int i = 0; i < m; i++)
   {
     cin >> a >> b >> c;
-    if (dp[a][b] > c)
+    if (dp[a][b] > c)   //노드와 노드 사이의 경로가 여러개인 경우도 있으면 이렇게 테이블을 채운다 
       dp[a][b] = c;
   }
   for (int k = 1; k <= n; k++)
@@ -125,7 +125,7 @@ int main()
     {
       for (int j = 1; j <= n; j++)
       {
-        //dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j]);
+        //dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j]); 
         if(dp[i][k]+dp[k][j]<dp[i][j])
           dp[i][j]=dp[i][k]+dp[k][i];
       }
