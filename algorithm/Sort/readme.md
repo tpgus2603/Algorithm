@@ -26,7 +26,9 @@ for(int i=n-1;i>0;i--)
    }
 ```
 
--삽입정렬(Insertion sort): Input sensitive한 정렬로 sort된 부분과 sort되지 않는 부분을 나눠서 정렬되지 않은 부분을 정렬된 부분의
+-삽입정렬(Insertion sort)
+-
+Input sensitive한 정렬로 sort된 부분과 sort되지 않는 부분을 나눠서 정렬되지 않은 부분을 정렬된 부분의
 마지막 원소와 비교하면서 들어갈 위치를 탐색하게한다. O(N^2)의 시간복잡도를 지니지만 정렬된 부분을 알고있을때 일부분에만 정렬을 시행하면된다.
 ```
 void insert_sort(int arr[],int size,int k) //k element까지 정렬된 부분일때
@@ -44,7 +46,9 @@ void insert_sort(int arr[],int size,int k) //k element까지 정렬된 부분일
 	}
 }
 ```
--Shell sort: 선택정렬을 개선한 정렬로 가장 작은 값이 맨 오른쪽에 있는경우 상당히 오래걸리는 경우를 보안하기위해 gap을 만들어  큰 간격으로 그룹을 만들어 비교를  그룹별로 
+-Shell sort: 
+-
+선택정렬을 개선한 정렬로 가장 작은 값이 맨 오른쪽에 있는경우 상당히 오래걸리는 경우를 보안하기위해 gap을 만들어  큰 간격으로 그룹을 만들어 비교를  그룹별로 
 수행하면서 작은값들을 앞으로 보낸다.  여러가지 gap을 사용하며 큰 gap부터 작은 gap으로 줄여나간다.
 ```
 void shell_sort(int arr[],int size)
@@ -67,7 +71,9 @@ void shell_sort(int arr[],int size)
 	}
 ```
 
--MergeSort: 분할정복 기법을 이용하여 수열을 나눠 각 각 정렬한 후 합치는 정렬방법 O(nlogn)의 시간복잡도를 지니고 별도의 메모리공간이 필요하다.
+-MergeSort
+-
+분할정복 기법을 이용하여 수열을 나눠 각 각 정렬한 후 합치는 정렬방법 O(nlogn)의 시간복잡도를 지니고 별도의 메모리공간이 필요하다.
 새로운 메모리를 할당하고 각 분할된 배열의 첫번째 원소에 커서를 잡고 비교를 하면서 작은 원소를 할당한 메모리에 넣는다  
 
 ```
@@ -96,7 +102,9 @@ void merge_sort(int st, int en) { //[ )
 	merge(st, en); 
 }
 ```
--Qucik sort: 분할정복 기법을 통해 구현된다. Pivot이라는 기준점(배열의 첫요소 혹은 끝요소)과 정렬된 양쪽 배열의 첫 요소로 left cursor와 right cursor를 잡고 right cursor는 pivot값보다 큰 값으로 설정한다.
+-Qucik sort
+-
+분할정복 기법을 통해 구현된다. Pivot이라는 기준점(배열의 첫요소 혹은 끝요소)과 정렬된 양쪽 배열의 첫 요소로 left cursor와 right cursor를 잡고 right cursor는 pivot값보다 큰 값으로 설정한다.
 반복문을 통해 left cursor가 pivot보다 크거나 같은값을 가리키고  right cursor가 pivot보다 작은 값을 가리키면 swap하여 위치를 바꾼다. 두 커서가 교차가 될때 right/left cursor의 위치는 pivot의 위치이다.
 
 평균 O(NlogN)의 시간복잡도를 지니지만 피벗 설정이 좋지 않된 경우 worst case에서 O(N^2)의 시간복잡도를 지니기도 한다.
@@ -131,7 +139,9 @@ void quicksort(int st, int en)
 ```
 -Heapsort: 우선순위큐(Heap)를 활용하여 정렬을한다 heapify를 통하여 O(N)으로 모든 배열의 요소를 heap에 집어넣은 후 heap에서 원소를 하나씩 꺼내어 정렬을 구현한다. 
 
--Counting sort: 배열의 원소값의 범위 만큼에 해당하는 테이블의 크기를 설정하여 배열 인덱스를 값으로 취급하면서 정렬하려는 배열에서 각 원소의 개수를 counting하면서 배열을 채운다. O(N+K)   N:수의 개수 K:수의 범위 
+-Counting sort
+-
+배열의 원소값의 범위 만큼에 해당하는 테이블의 크기를 설정하여 배열 인덱스를 값으로 취급하면서 정렬하려는 배열에서 각 원소의 개수를 counting하면서 배열을 채운다. O(N+K)   N:수의 개수 K:수의 범위 
 ```
 int count[100001];
 vector<int> sort;
@@ -154,7 +164,9 @@ void countsort()  //o(n+k)알고리즘 k는 수의 범위 n은 수의 개수 배
 	}
 }
 ```
--Radix sort(기수정렬): 배열의 원소들을 직접 비교하지 않고 radix(기수:10진수의 경우 0~9범위)만 비교하여 구현, 자리수의 개수만큼 정렬을 시행한다. stable하게 구현하여 같은 기수에 대해 이전 정렬의 순서를 유지한다   O(K(n+r))  k: 자리수 ,n=배열의 크기 r=radix
+-Radix sort(기수정렬)
+-
+배열의 원소들을 직접 비교하지 않고 radix(기수:10진수의 경우 0~9범위)만 비교하여 구현, 자리수의 개수만큼 정렬을 시행한다. stable하게 구현하여 같은 기수에 대해 이전 정렬의 순서를 유지한다   O(K(n+r))  k: 자리수 ,n=배열의 크기 r=radix
 ```
 int k = 3; //k=자리수 최대값 
 int p10[3]; //10의 지수값 저장배열 
