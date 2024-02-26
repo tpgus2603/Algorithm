@@ -57,134 +57,44 @@ int v, e;
 
 int back[20001];
 
-void dk(int st) //경로기능 구현 된 다익스트라 
-{
-  fill(d, d + v + 1, I);
-  d[st] = 0;
-  priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-  pq.push({d[st], st});
-  while (!pq.empty())
-  {
-    auto cur = pq.top();
-    pq.pop();
-    if (cur.D != d[cur.V])
-      continue;
-    for (auto nxt : adj[cur.V])
-    {
-      if (d[nxt.V] > d[cur.V] + nxt.D)
-      {
-        d[nxt.V] = d[cur.V] + nxt.D;
-        back[nxt.V] = cur.V;
-        pq.push({d[nxt.V], nxt.V});
-      }
-    }
-  }
-  vector<int> path;
-  for (int cur = v; cur != st; cur = back[cur])
-  {
-    path.push_back(cur);
-  }
-  path.push_back(st);
-}
-```
--플로이드 알고리즘: 
--
-모든 정점 쌍 사이의 최단거리를 구하는 알고리즘으로 2차원 dp를 활용한다.
-
-k=1~n까지 정점 k를 거쳐가는 최소경로 테이블 업데이트  (cf 최소값 갱신에 min함수 사용보다 필요할때만 갱신이 일어나도록 하는것이 유리)
-
- 다익스트라 알고리즘과 비교하여 음수 간선을 처리 할 수있다. 하지만 음수 사이클을 처리하진 못함 
-
- 경로복원을 위해 정점에서 다음으로 거쳐가는 정점을 저장하는 테이블 을 따로 만들어 dp테이블이 갱신될때마다  경로복원용 테이블을 갱신한다. 
+void dk(int st) //경음)
 
 ```
-#include <iostream>
-#include <algorithm>
-#include<vector>
-
+#define MAX 1e9
+long long  d[501];
 using namespace std;
-
-#define MAX 100000000
-int dp[101][101];
-int nxt[101][101];
 
 int main()
 {
+  ios::sync_with_stdio(0);cin.tie(0);
 
-  ios::sync_with_stdio(0);
-  cin.tie(0);
-  for (int i = 0; i <= 100; i++)
+  int n,m;
+  vector<tuple<int,int,int>> edge;
+  cin>>n>>m;
+  for(int i=0;i<m;i++)
   {
-    for (int j = 0; j <= 100; j++)
-    {
-      if (i == j)
-        dp[i][j] = 0;
-      else
-        dp[i][j] = MAX;
-    }
+    int a,b,c;
+    cin>>a>>b>>c;
+    edge.push_back({a,b,c});
   }
-  int n, m;
-  cin >> n >> m;
-  int a, b, c;
-  for (int i = 0; i < m; i++)
-  {
-    cin >> a >> b >> c;
-    if (dp[a][b] > c)
-      dp[a][b] = c;
-    nxt[a][b]=b;
-  }
-  for (int k = 1; k <= n; k++)
-  {
-    for (int i = 1; i <= n; i++)
-    {
-      for (int j = 1; j <= n; j++)
-      {
-        if(dp[i][j]>dp[i][k]+dp[k][j])
-        {
-            dp[i][j]=dp[i][k]+dp[k][j];
-            nxt[i][j]=nxt[i][k]; //k를 거쳐감 
-        }
-      }
-    }
-  }
-  for (int i = 1; i <= n; i++)
-  {
-    for (int j = 1; j <= n; j++)
-    {
-      if(dp[i][j]==MAX)
-        cout<<'0'<<' ';
-      else
-       cout << dp[i][j] << ' ';
-    }
-    cout << '\n';
-  }
-
+  fill(d,d+n+1,MAX);
+  d[1]=0;
+  bool cycle=false;
   for(int i=1;i<=n;i++)
   {
-    for(int j=1;j<=n;j++)
+    for(int j=0;j<m;j++)
     {
-      if (dp[i][j] == 0 || dp[i][j] == MAX)
+      int u,v,c;
+      tie(u,v,c)=edge[j];
+      if(d[u]==MAX)continue; //이미 방문한 정점을 시작점하는 간선의 거리를 갱신한다. 
+      if(d[v]>d[u]+c)
       {
-        cout << "0" << '\n';
-        continue;
+        d[v]=d[u]+c;
+        if(i==n)
+          cycle=true;
       }
-      vector<int> path;
-      int st=i;
-      while(st!=j)
-      {
-        path.push_back(st);
-        st=nxt[st][j];
-      }
-      path.push_back(j);
-      cout<<path.size()<<' ';
-      for(auto k :path)
-        cout<<k<<' ';
-      cout<<'\n';
     }
   }
-
-
-}
 ```
 
 
