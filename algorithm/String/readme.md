@@ -77,10 +77,24 @@ int main() {
 }
 
 ```
-
-
 시간복잡도 O(N*M) : N:문자열의 길이 M: 구분 문자열의 길이 
 
+-문자열 함수들
+-
+substr(size_t pos = 0, size_t len = npos) const: pos 위치부터 시작하여 len 길이만큼의 부분 문자열을 반환합니다. len을 지정하지 않으면, pos부터 문자열의 끝까지의 부분 문자열을 반환합니다.
 
+erase(size_t pos, size_t len = npos): pos에서 시작하여 len 길이만큼의 문자열을 삭제합니다. len이 지정되지 않으면 pos부터 문자열의 끝까지 모두 삭제됩니다.
+
+erase(iterator first, iterator last): first 반복자 위치부터 last 반복자 바로 전 위
+
+find(const std::string& str, size_t pos ) const: pos 위치부터 시작하여 문자열 str을 찾습니다. 찾은 위치를 반환하고, 찾지 못하면 std::string::npos를 반환합니다.
+
+find(char c, size_t pos ) const: pos 위치부터 시작하여 문자 c를 찾습니다. 위와 같이 찾은 위치를 반환하고, 찾지 못하면 std::string::npos를 반환합니다.
+
+replace(size_t pos, size_t len, const std::string& str): pos 위치부터 len 길이의 문자열을 str로 교체합니다.
+
+append(const std::string& str): 현재 문자열의 끝에 str을 추가합니다.
+
+nsert(size_t pos, const std::string& str)
 
 
