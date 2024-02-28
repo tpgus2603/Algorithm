@@ -60,7 +60,7 @@ vector<string> split(const string& s, const string& delimiter) {
         end = s.find(delimiter, start);
     }
 
-    tokens.push_back(s.substr(start, end));
+    tokens.push_back(s.substr(start));
     return tokens;
 }
 
