@@ -1,4 +1,6 @@
 -Dp(다이나믹 프로그래밍):  여러개의 하위 문제를 먼저 푼 후 그 결과를 쌓아올려 주어진 문제를 해결하는 알고리즘 -> 정해진 범위내에서 최대 최소를 찾을때 많이 사용됨
+-
+일반적인 dp는 보통 바텀업 방식 즉 밑에서 부터 아래로 누적하면서 계산을한다.
 
   ex)평범한 배낭문제,피보나치수열
   
@@ -72,6 +74,99 @@ int main()
 	cout << max(dp[n][1], dp[n][2]);
 }
 
+```
+
+메모리 공간이 한정된 경우 1차원 dp테이블을 2중 반복문에서 반복하면서 갱신하는 문제역시 존재한다.
+
+ex) 동전 2
+
+문제
+n가지 종류의 동전이 있다. 이 동전들을 적당히 사용해서, 그 가치의 합이 k원이 되도록 하고 싶다. 그러면서 동전의 개수가 최소가 되도록 하려고 한다. 각각의 동전은 몇 개라도 사용할 수 있다.
+
+입력
+첫째 줄에 n, k가 주어진다. (1 ≤ n ≤ 100, 1 ≤ k ≤ 10,000) 다음 n개의 줄에는 각각의 동전의 가치가 주어진다. 동전의 가치는 100,000보다 작거나 같은 자연수이다. 가치가 같은 동전이 여러 번 주어질 수도 있다.
+
+출력
+첫째 줄에 사용한 동전의 최소 개수를 출력한다. 불가능한 경우에는 -1을 출력한다.
 
 ```
+풀이 2
+using namespace std;
+int n, k;
+int a[10005], d[10005];
+int main(void) {
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  cin >> n >> k;
+  for (int i = 0; i < n; i++)
+    cin >> a[i];
+  fill(d, d + 10005, 100005);
+  d[0] = 0; // 0원: 0개
+  for (int i = 0; i < n; i++) {
+    for (int j = a[i]; j <= k; j++)
+      // 동전 하나 추가한 값과 기존 값 중 작은값
+      d[j] = min(d[j], d[j - a[i]] + 1);
+  }
+
+  cout << (d[k] == 100005 ? -1 : d[k]) << '\n';
+}
+
+```
+
+탑다운 dp: 메모제이션으로도 불리는 방식으로 재귀 호출을 하여 범위를 줄여나간다. 또한 맵을 이용하여 이미 계산된 경우는 중복하여 계산하지 않는다.
+
+ex) 피보나치
+
+```
+#include<iostream>
+#include<algorithm>
+#include<map>
+#include<unordered_map>
+#define ll long long
+#define X  1000000007
+using namespace std;
+
+map<ll,ll> fibo;
+
+
+ll n;
+
+ll cal( ll n)
+{
+  if(n==1)
+    return 1;
+  else if(n==0)
+    return 0;
+  if(fibo.count(n)>0)
+    return fibo[n];
+
+  if(n%2==0)
+  {
+    ll a=n/2;
+    ll b= cal(a);
+    ll c=cal(a-1);
+    fibo[n]=(b+2*c)*b%X;
+    return fibo[n];
+
+  }
+  else
+  {
+    ll a=(n+1)/2;
+    ll b= cal(a);
+    ll c= cal(a-1);
+    fibo[n]=(b*b+c*c)%X;
+    return fibo[n];
+  }
   
+} 
+
+int main()
+{
+  ios::sync_with_stdio(0);cin.tie(0);
+  cin>>n;
+  ll t=cal(n);
+  cout<<t;
+}
+```
+
+
