@@ -195,12 +195,28 @@ int main(void){
       int ny = cur.Y + dy[dir];
       if(nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
       if(dist1[nx][ny] >= 0 || board[nx][ny] == '#') continue; 
-      dist1[nx][ny] = dist1거
+      dist1[nx][ny] = dist1[cur.X][cur.Y]+1;
+      Q1.push({nx,ny});
+    }
+  }
+
+  // 지훈이에 대한 BFS
+  while(!Q2.empty()){
+    auto cur = Q2.front(); Q2.pop();
+    for(int dir = 0; dir < 4; dir++){
+      int nx = cur.X + dx[dir];
+      int ny = cur.Y + dy[dir];
+      if(nx < 0 || nx >= n || ny < 0 || ny >= m){ // 범위를 벗어났다는 것은 탈출에 성공했다는 의미. 큐에 거리 순으로 들어가므로 최초에 탈출한 시간을 출력하면 됨.
+        cout << dist2[cur.X][cur.Y]+1; 
+        return 0;
+      }
+      if(dist2[nx][ny] >= 0 || board[nx][ny] == '#') continue;
+      if(dist1[nx][ny] != -1 && dist1[nx][ny] <= dist2[cur.X][cur.Y]+1) continue; // 불의 전파 시간을 조건에 추가  불보다 늦게 도착한 경우는 실제로는 못가는 경우이기에 continue
       dist2[nx][ny] = dist2[cur.X][cur.Y]+1;
       Q2.push({nx,ny});
     }
   }
-  cout << "IMPOSSIBLE"; // 여기에 도달했다는 것은 탈출에 실패했음을 의미.
-}
+  cout << "IMPOSSIBLE"; // 여기에 도달했다는 것은 탈출에 실패했음
+
 ```
 
