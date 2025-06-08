@@ -1,0 +1,1 @@
+{"name":"Local: 14921","url":"/Users/limsehyun/.vscode/Boj/gold/14921.cpp","tests":[{"id":1748089251220,"input":"5\n-99 -2 -1 4 98","output":""},{"id":1748089279309,"input":"4\n-100 -2 -1 103","output":"-2 -1"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/limsehyun/.vscode/Boj/gold/14921.cpp","group":"local","local":true}

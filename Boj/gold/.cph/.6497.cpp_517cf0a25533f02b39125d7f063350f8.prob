@@ -1,0 +1,1 @@
+{"name":"Local: 6497","url":"/Users/limsehyun/.vscode/Boj/gold/6497.cpp","tests":[{"id":1749222577376,"input":"7 11\n0 1 7\n0 3 5\n1 2 8\n1 3 9\n1 4 7\n2 4 5\n3 4 15\n3 5 6\n4 5 8\n4 6 9\n5 6 11\n0 0","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/limsehyun/.vscode/Boj/gold/6497.cpp","group":"local","local":true}
