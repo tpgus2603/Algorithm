@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-class Main7562{
+class Main{
   static int [][] dis;
   static int dx[]={-2,-2,-1,-1,1,1,2,2};
   static int dy[]={-1,1,-2,2,-2,2,-1,1};
@@ -54,12 +54,6 @@ class Main7562{
         }
       }
     }
-
-
-
-
-
-
 
 
   }
