@@ -7,27 +7,28 @@ using namespace std;
 #define X first
 #define Y second
 
+/* ───── 전역 ───── */
 int N, Q;
-int dish[15][15];
-int ndish[15][15];
+int dish[15][15];          // 현재 배양 용기
+int ndish[15][15];         // 이주용 임시 용기
 
 struct Micro{
     int id, area;
     int minR, minC, maxR, maxC;
-    vector<pair<int,int>> cell;
+    vector<pair<int,int>> cell; //좌표정보 
 };
-vector<Micro> micros;
-bool dead[55];
+vector<Micro> micros;      // 이번 단계 살아남은 무리
+bool dead[55];             // 영구 사망 여부
 
 int dx[4]={-1,0,1,0};
 int dy[4]={0,1,0,-1};
-bool over(int x,int y){return x<0||x>=N||y<0||y>=N;}
+bool over(int x,int y){ return x<0||x>=N||y<0||y>=N; }
 
 /* ───── 1. 투입 ───── */
-void inject(int id,int r1,int c1,int r2,int c2){
-    for(int r=r1;r<=r2;r++)
-        for(int c=c1;c<=c2;c++)
-            dish[r][c]=id;
+void inject(int id, int r1, int c1, int r2, int c2) {
+    for (int r = r1; r < r2; r++)        
+        for (int c = c1; c < c2; c++)   
+            dish[r][c] = id;
 }
 
 /* ───── 2. 생존 판정 ───── */
@@ -51,6 +52,7 @@ void collect_alive(){
             while(!q.empty()){
                 auto cur=q.front(); q.pop();
                 m.cell.push_back(cur); m.area++;
+
                 m.minR=min(m.minR,cur.X); m.minC=min(m.minC,cur.Y);
                 m.maxR=max(m.maxR,cur.X); m.maxC=max(m.maxC,cur.Y);
 
@@ -60,10 +62,11 @@ void collect_alive(){
                     vis[nx][ny]=1; q.push({nx,ny});
                 }
             }
-            if(seen[id]) dead[id]=true;
+            if(seen[id]) dead[id]=true;          // 두 개 이상 성분 → 전체 사망
             else{ seen[id]=true; micros.push_back(m); }
         }
 
+    /* 사망 ID 제거 */
     for(int i=0;i<N;i++)
         for(int j=0;j<N;j++)
             if(dead[dish[i][j]]) dish[i][j]=0;
@@ -81,7 +84,7 @@ bool cmp(const Micro& a,const Micro& b){
 void reset_ndish(){ memset(ndish,0,sizeof ndish); }
 
 bool fit(const Micro& m,int sr,int sc){
-    for(auto p:m.cell){
+    for(auto p:m.cell){ //모든 좌표에대해서 해야함 
         int nr=sr+(p.X-m.minR), nc=sc+(p.Y-m.minC);
         if(over(nr,nc)||ndish[nr][nc]) return false;
     }
@@ -129,20 +132,17 @@ long long calc_score(){
     return res;
 }
 
-int main(){
-    ios::sync_with_stdio(0);
-    cin.tie(0);
+int main() {
+    ios::sync_with_stdio(0);cin.tie(0);
 
-    cin>>N>>Q;
-    for(int id=1;id<=Q;id++){
-        int r1,c1,r2,c2;
-        cin>>r1>>c1>>r2>>c2;
-        --r1; --c1; --r2; --c2;        // 0-based (모두 포함)
-
-        inject(id,r1,c1,r2,c2);
-        collect_alive();
-        migrate();
-        cout<<calc_score()<<'\n';
+    cin >> N >> Q;
+    for (int id = 1; id <= Q; id++) {
+        int r1, c1, r2, c2;
+        cin >> r1 >> c1 >> r2 >> c2;   
+        inject(id, r1, c1, r2, c2);    
+        collect_alive();              
+        migrate();                   
+        cout << calc_score() << '\n';  
     }
     return 0;
 }
