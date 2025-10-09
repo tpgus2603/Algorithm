@@ -75,9 +75,4 @@ class Main{
       ac(func,tokens);
     }
   }
-
-
-
-
-
 }

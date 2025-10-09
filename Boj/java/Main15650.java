@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-class Main15650{
+class Main{
 
   static int n,m;
   static int [] sel;
@@ -12,7 +12,7 @@ class Main15650{
     if(depth==m)
     { 
       for(int i=0;i<m;i++)
-        System.out.print(sel[i]+" ");
+        System.out.print(sel[i]+"");
       System.out.print("\n");
       return;
     }
@@ -33,8 +33,6 @@ class Main15650{
       func(1,0);
 
   }
-
-
 
 
 }

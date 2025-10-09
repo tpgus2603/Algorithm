@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-class Main1541{
+class Main{
 
 
 
@@ -14,12 +14,14 @@ class Main1541{
     String [] tokens =str.split("\\-");
     int ans=0;
     String [] token= tokens[0].split("\\+");
+    //첫 요소
     for(int j=0;j<token.length;j++)
     {
         ans+=Integer.parseInt(token[j]);
     }
 
     int len=tokens.length;
+    //나머지 요소 
     for(int i=1;i<len;i++)
     {
         String cur=tokens[i];
@@ -33,9 +35,6 @@ class Main1541{
     }
     System.out.println(ans);
   }
-
-
-
 
 
 }
