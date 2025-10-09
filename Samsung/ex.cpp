@@ -47,7 +47,7 @@ void spiral_from_center(int n) {
                 x = nx; y = ny;
 
                 // 범위 밖이면 채우기/기록은 건너뜀
-                //if (over(x, y, n)) continue;
+                if (over(x, y, n)) continue;
 
                 ++num;
                 A[x][y] = (int)num;
